@@ -1,5 +1,48 @@
-<title>{{ with .Title }}{{ . }} &ndash; {{end}}{{ .Site.Title }}</title>
-{{ with .Site.Params.about }}<meta name="description" content="{{ .description }}">{{ end }}
+<title>
+    {{- if .IsHome -}}
+      Home | {{ .Site.Title }}
+    {{- else if .Params.hide_site_title -}}
+      {{ .Page.Title }}
+    {{- else if .Page.Title -}}
+      {{ .Page.Title }} | {{ .Site.Title }}
+    {{- else -}}
+      {{ .Site.Title }}
+    {{- end -}}
+  </title> 
+
+{{- if .IsHome -}}
+  <meta name="description" content="{{ site.Params.Description }}" />
+{{- else -}}
+  <meta name="description" content="{{ .Params.Description }}" />
+{{- end }}
+
+{{- if isset .Params "canonical" -}}
+  <link rel="canonical" href="{{ .Params.canonical }}" />
+{{- else -}}
+  <link rel="canonical" href="{{ .Permalink }}" />
+{{- end }}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="{{ .Params.TwitterSite }}" />
+{{- if .IsHome -}}
+  <meta name="og:title" content="{{ .Site.Title }}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="{{ .Site.Params.Description }}" />
+  <meta property="og:url" content="{{ absLangURL .Site.BaseURL }}" />
+  <meta name="og:image" content="{{ .Params.OgImage }}" />
+  <meta name="twitter:creator" content="{{ .Params.TwitterCreator }}" />
+  <meta name="twitter:title" content="{{ .Site.Title }}" />
+  <meta name="twitter:image" content="{{ .Params.TwitterImage }}" />
+{{- else -}}
+  <meta name="og:title" content="{{ .Page.Title }}" />
+  <meta property="og:type" content="{{ .Params.OgType }}" />
+  <meta property="og:description" content="{{ .Params.Description }}" />
+  <meta property="og:url" content="{{ absLangURL .Page.Permalink }}" />
+  <meta name="og:image" content="{{ .Params.OgImage }}" />
+  <meta name="twitter:image" content="{{ .Params.TwitterImage }}" />
+  <meta name="twitter:creator" content="{{ .Params.TwitterCreator }}" />
+  <meta name="twitter:title" content="{{ .Page.Title }}" />
+{{- end }}
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8"/>
@@ -15,3 +58,9 @@
 <link rel="stylesheet" href="{{ printf "css/palettes/%s.css" (.Site.Params.theme.palette | default "base16-dark") | absURL }}">
 <link rel="stylesheet" href="{{ "css/risotto.css" | absURL }}">
 <link rel="stylesheet" href="{{ "css/custom.css" | absURL }}">
+
+{{partial "favicon.html" .}}
+
+{{if .Params.katex}}
+{{partial "katex.html" .}}
+{{end}}

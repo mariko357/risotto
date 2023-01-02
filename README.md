@@ -1,65 +1,49 @@
-# risotto
+# Changes:
+- Improved SEO.
+- Index page now displays last post.
+- Changed language selection to be more user-friendly.
+- Fixed logo pointing to main language in multilingual mode.
+- Added pagination.
+- 404 page can now be created with .md file.
+- Added support for favicons.
+- Added support for KaTeX
 
-risotto is a minimalist, responsive [hugo](https://gohugo.io) theme inspired by terminal ricing aesthetics.
+---
 
-![Screenshot of the risotto theme](https://raw.githubusercontent.com/joeroe/risotto/master/images/screenshot.png)
+# Configuration:
 
-## Install
-
-The easiest way to install the theme is to clone this repository into your site's `themes` directory:
-
-```shell
-git clone https://github.com/joeroe/risotto themes/risotto
+## Language selection:
 ```
-
-If your site is already a git repository, you can add the theme as a submodule instead:
-
-```shell
-git submodule add https://github.com/joeroe/risotto.git themes/risotto
+[params.avLangs]
+  [params.avLangs.en]
+    name = "English"
+    text = "🇬🇧 This page is also available in"
+    link = "English"
+  [params.avLangs.ua]
+    name = "Українська"
+    text = "🇺🇦 Ця сторінка також доступна"
+    link = "Українською"
 ```
+**Will produce the following:**
 
-## Update
+![](https://i.imgur.com/RKTcjip.png)
 
-If you installed the theme using `git clone`, pull the repository to get the latest version:
+![](https://i.imgur.com/dRJ3MZo.png)
 
-```shell
-cd themes/risotto
-git pull
-```
+## Pagination:
+- `paginate` - Hugo's  built-in parameter. Number of posts per page.
+- `params.adjLinks` - Number of adjent links to display in the page selector.
 
-Or, if you added it as a git submodule:
+## SEO:
+- `twitterCreator: "@yourname"` -  	@username for the website used in the card footer.
+- `twitterSite: "@yourname"` - @username for the content creator / author.
+- `twitterImage: "/path/to/img"` - Path to Twitter cards image.
+- `ogImage: "/path/to/img"` - Path to OG image.
+- `ogType: "article"` - Type of the content for OG.
 
-```shell
-git submodule update --remote
-```
+[Twitter Cards](https://developer.twitter.com/en/docs/twitter-for-websites/cards/guides/getting-started)
 
-## Configure
+[The Open Graph protocol](https://ogp.me/)
 
-To use the theme, add `theme = risotto` to your site's `config.toml` or `config.yaml`.
-
-See `exampleSite/config.toml` for the theme-specific parameters you need to add to your site's `config.toml` or `config.yaml` to configure the theme.
-
-### Colour palettes
-
-Colour palettes for the theme are defined using the [base16 system](https://github.com/chriskempson/base16):
-
-| Base | Default colour | Used for | Examples |
-| ---- | -------------- | -------- | -------- |
-| 00   | Dark           | Background | Page background          |
-| 01   | │              | Alt. background | Content background          |
-| 02   | │              | In-text backgrounds | `<pre>`, `<code>`, `<kbd>`, `<samp>` |
-| 03   | │              | Muted text | `:before` & `:marker` symbols |
-| 04   | │              | Alt. foreground | Aside text          |
-| 05   | │              | Foreground         | Content text         |
-| 06   | │              |          |          |
-| 07   | Light          |          |          |
-| 08   | Red            |          |          |
-| 09   | Orange         |          |          |
-| 0A   | Yellow         | Highlights | Selected text, `<mark>` |
-| 0B   | Green          | Primary accent | Logo          |
-| 0C   | Cyan           | Active links | `a:active`, `a:hover`         |
-| 0D   | Blue           | Links    | `a:link`, `a:visited`         |
-| 0E   | Magenta        |          |          |
-| 0F   | Brown          |          |          |
-
-For light mode palettes, the sequence of 00–07 should be reversed (light to dark, not dark to light).
+## KaTeX:
+`katex: true` - to turn on KaTeX in front matter.
