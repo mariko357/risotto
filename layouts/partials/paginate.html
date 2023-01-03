@@ -1,0 +1,33 @@
+{{ $site := .Site }}
+<div class="paginator__nums">
+    {{ if ne .Paginator.PageNumber 1 }}
+        <a href="{{relLangURL .Paginator.First.URL}}"><<</a>
+    {{ end }}
+
+    <!--{{ if .Paginator.HasPrev }}
+        <a href="{{ .Paginator.Prev.URL }}"><</a>
+    {{ end }}-->
+    
+    {{ $curPaginator := .Paginator }}
+    {{ $CurPageNum := .Paginator.PageNumber }}
+    {{ $adj := $site.Params.AdjLinks }}
+
+    {{ range $i := (seq $curPaginator.TotalPages) }}
+        {{ if or (and (ge . (sub $CurPageNum $adj)) (le . $CurPageNum)) (and (le . (add $CurPageNum $adj)) (ge . $CurPageNum)) }}
+            {{ if ne $CurPageNum . }}
+                <a href="{{relLangURL "/post/page/"}}{{.}}/">{{ . }}</a>
+            {{ else }}
+                {{ . }}
+            {{ end }}
+        {{ end }}
+    {{ end }}
+    
+
+    <!--{{ if .Paginator.HasNext }}
+        <a href="{{ .Paginator.Next.URL }}">></a>
+    {{ end }}-->
+
+    {{ if ne .Paginator.PageNumber .Paginator.TotalPages }}
+        <a href="{{relLangURL .Paginator.Last.URL}}">>></a>
+    {{ end }}
+</div>

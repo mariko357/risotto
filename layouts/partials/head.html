@@ -29,17 +29,17 @@
   <meta property="og:type" content="website" />
   <meta property="og:description" content="{{ .Site.Params.Description }}" />
   <meta property="og:url" content="{{ absLangURL .Site.BaseURL }}" />
-  <meta name="og:image" content="{{ .Params.OgImage }}" />
+  <meta name="og:image" content="{{ .Site.BaseURL }}{{ .Params.OgImage }}" />
   <meta name="twitter:creator" content="{{ .Params.TwitterCreator }}" />
   <meta name="twitter:title" content="{{ .Site.Title }}" />
-  <meta name="twitter:image" content="{{ .Params.TwitterImage }}" />
+  <meta name="twitter:image" content="{{ .Site.BaseURL }}{{ .Params.TwitterImage }}" />
 {{- else -}}
   <meta name="og:title" content="{{ .Page.Title }}" />
   <meta property="og:type" content="{{ .Params.OgType }}" />
   <meta property="og:description" content="{{ .Params.Description }}" />
   <meta property="og:url" content="{{ absLangURL .Page.Permalink }}" />
-  <meta name="og:image" content="{{ .Params.OgImage }}" />
-  <meta name="twitter:image" content="{{ .Params.TwitterImage }}" />
+  <meta name="og:image" content="{{ .Site.BaseURL }}{{ .Params.OgImage }}" />
+  <meta name="twitter:image" content="{{ .Site.BaseURL }}{{ .Params.TwitterImage }}" />
   <meta name="twitter:creator" content="{{ .Params.TwitterCreator }}" />
   <meta name="twitter:title" content="{{ .Page.Title }}" />
 {{- end }}
